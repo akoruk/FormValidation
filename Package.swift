@@ -13,10 +13,17 @@ let package = Package(
         .library(
             name: "FormValidation",
             targets: ["FormValidation"]),
+        .executable(
+            name: "ExampleApp",
+            targets: ["ExampleApp"])
     ],
     targets: [
         .target(
             name: "FormValidation"),
+        .executableTarget(
+            name: "ExampleApp",
+            dependencies: ["FormValidation"],
+            path: "Examples/ExampleApp"),
         .testTarget(
             name: "FormValidationTests",
             dependencies: ["FormValidation"]),

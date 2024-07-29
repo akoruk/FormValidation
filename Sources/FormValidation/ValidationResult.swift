@@ -14,20 +14,7 @@ public enum ValidationResult {
     case warning(_ message: String)
     case error(_ message: String)
     
-    var color: Color {
-        switch self {
-        case .none:
-                .clear
-        case .success:
-                .green
-        case .warning:
-                .yellow
-        case .error:
-                .red
-        }
-    }
-    
-    var message: String? {
+    public var message: String? {
         switch self {
         case .none:
             nil
