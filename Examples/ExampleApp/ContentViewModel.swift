@@ -13,12 +13,15 @@ class ContentViewModel: ObservableObject {
     
     @Published var usernameValidator: StringValidator!
     @Published var emailValidator: StringValidator!
+    @Published var phoneNumberValidator: StringValidator!
+    
     private var validators: [any Validator] = []
     
     @Published private(set) var usernameValidationResult: ValidationResult = .none
     @Published private(set) var emailValidationResult: ValidationResult = .none
+    @Published private(set) var phoneValidationResult: ValidationResult = .none
     
-    @Published var phoneNumber: String = ""
+    @Published var phoneMask = "+(XX) XXX XXX XX XX"
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -53,17 +56,28 @@ class ContentViewModel: ObservableObject {
             }
         )
         
+        phoneNumberValidator = StringValidator(
+            value: "",
+            isValidating: false,
+            rules: [
+                .required(.warning("this is required")),
+                .phone(12, .error("phone is invalid"))
+            ],
+            isInvalidatingOnChange: false,
+            onValidate: { [weak self] validationResult in
+                self?.phoneValidationResult = validationResult
+            }
+        )
+
         validators.append(usernameValidator)
         validators.append(emailValidator)
+        validators.append(phoneNumberValidator)
     }
     
     func showValues() {
     }
     
     func validate() {
-        usernameValidator.isValidating = true
-        emailValidator.isValidating = true
-        
         validators.forEach { validator in
             validator.isValidating = true
         }
@@ -73,7 +87,8 @@ class ContentViewModel: ObservableObject {
     }
     
     func invalidate() {
-        usernameValidator.isValidating = false
-        emailValidator.isValidating = false
+        validators.forEach { validator in
+            validator.isValidating = false
+        }
     }
 }

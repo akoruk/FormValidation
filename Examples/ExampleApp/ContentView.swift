@@ -31,15 +31,22 @@ struct ContentView: View {
                 validationResult: viewModel.emailValidationResult,
                 text: $viewModel.emailValidator.value
             )
+            .formatter(
+                StringFormatter(
+                    rule: .email,
+                    value: $viewModel.emailValidator.value
+                )
+            )
             
             TextFieldView(
                 placeholder: "Enter your phone",
-                text: $viewModel.phoneNumber
+                validationResult: viewModel.phoneValidationResult,
+                text: $viewModel.phoneNumberValidator.value
             )
             .formatter(
                 StringFormatter(
-                    input: $viewModel.phoneNumber,
-                    rule: .phone("+(XX) XXX XXX XXXX")
+                    rule: .phone(viewModel.phoneMask),
+                    value: $viewModel.phoneNumberValidator.value
                 )
             )
             
@@ -61,7 +68,7 @@ struct ContentView: View {
                     .background(Color.green)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
             }
-
+            
             Spacer()
         }
         .padding()

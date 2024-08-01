@@ -12,15 +12,15 @@ public class StringFormatter: Formatter {
     // MARK: - Properties
     
     public var rule: any FormationRule<String>
-    @Binding public var input: String
+    @Binding public var value: String
     
     // MARK: - Init
     
     public init(
-        input: Binding<String>,
-        rule: StringFormationRule
+        rule: StringFormationRule,
+        value: Binding<String>
     ) {
-        self._input = input
         self.rule = rule
+        self._value = value
     }
 }

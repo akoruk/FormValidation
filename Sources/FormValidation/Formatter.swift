@@ -10,8 +10,8 @@ import Foundation
 public protocol Formatter: ObservableObject {
     
     associatedtype T: Equatable
-    var input: T { get set }
     var rule: any FormationRule<T> { get }
+    var value: T { get set }
     
     func format()
     func unformat()
@@ -20,10 +20,10 @@ public protocol Formatter: ObservableObject {
 public extension Formatter {
     
     func format() {
-        input = rule.format(input)
+        value = rule.format(value)
     }
     
     func unformat() {
-        input = rule.unformat(input)
+        value = rule.unformat(value)
     }
 }
