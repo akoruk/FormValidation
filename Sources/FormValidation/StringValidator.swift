@@ -23,7 +23,6 @@ public class StringValidator: Validator {
     
     private var cancellables = Set<AnyCancellable>()
 
-    
     // MARK: - Init
     
     public init(
@@ -45,26 +44,26 @@ public class StringValidator: Validator {
     func setupSubscribers() {
         $value
             .dropFirst()
-            .removeDuplicates { previous, current in
-                previous == current
-            }
+            .removeDuplicates()
             .receive(on: RunLoop.main)
-            .sink { [weak self] value in
-                let shouldValidate = (self?.isValidating ?? false) && !(self?.isInvalidatingOnChange ?? false)
-                self?.isValidating = shouldValidate
-                let result = self?.validate() ?? .none
-                self?.onValidate?(result)
+            .sink { [weak self] _ in
+                guard let self else {
+                    return
+                }
+                let shouldValidate = isValidating && !isInvalidatingOnChange
+                isValidating = shouldValidate
+                onValidate?(validate())
             }
             .store(in: &cancellables)
         
         $isValidating
-            .removeDuplicates { previous, current in
-                previous == current
-            }
+            .removeDuplicates()
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
-                let result = self?.validate() ?? .none
-                self?.onValidate?(result)
+                guard let self else {
+                    return
+                }
+                onValidate?(validate())
             }
             .store(in: &cancellables)
     }

@@ -20,9 +20,12 @@ struct FormatterViewModifier<FormatterType: Formatter>: ViewModifier {
     @ViewBuilder
     func body(content: Content) -> some View {
         content
-            .onChange(of: formatter.input, perform: { _ in
-                formatter.format()
-            })
+            .onChange(
+                of: formatter.value,
+                perform: { _ in
+                    formatter.format()
+                }
+            )
             .onAppear {
                 formatter.format()
             }

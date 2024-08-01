@@ -26,6 +26,10 @@ public enum ValidationResult {
             message
         }
     }
+    
+    public var isValid: Bool {
+        self == .none || self == .success
+    }
 }
 
 extension ValidationResult: Equatable {
@@ -42,5 +46,17 @@ extension ValidationResult: Equatable {
         default:
             return false
         }
+    }
+}
+
+public extension Array where Element == ValidationResult {
+    
+    var firstSignificantResult: ValidationResult {
+        for result in self {
+            if !result.isValid {
+                return result
+            }
+        }
+        return self.contains(.success) ? .success : .none
     }
 }

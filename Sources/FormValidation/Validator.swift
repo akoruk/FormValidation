@@ -18,15 +18,15 @@ public protocol Validator: ObservableObject {
     var isInvalidatingOnChange: Bool { get }
     var onValidate: ((ValidationResult) -> Void)? { get }
     
+    var isValid: Bool { get }
+    
     func validate() -> ValidationResult
 }
 
 public extension Validator {
     
     var isValid: Bool {
-        let result = validate()
-        return result == .none
-        || result == .success
+        validate().isValid
     }
     
     func validate() -> ValidationResult {
