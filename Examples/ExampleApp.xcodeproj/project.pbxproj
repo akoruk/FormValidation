@@ -15,6 +15,7 @@
 		A916F6BA2C57D75600AFA2EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A916F6B72C57D75600AFA2EE /* ContentView.swift */; };
 		A916F6BB2C57D75600AFA2EE /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A916F6B82C57D75600AFA2EE /* TextFieldView.swift */; };
 		A916F6BF2C57D7B300AFA2EE /* ValidationResultOverlayModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A916F6BE2C57D7B300AFA2EE /* ValidationResultOverlayModifier.swift */; };
+		A9F20A732C6B7261006D3893 /* ValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F20A722C6B7261006D3893 /* ValidatorFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A916F6B72C57D75600AFA2EE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A916F6B82C57D75600AFA2EE /* TextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		A916F6BE2C57D7B300AFA2EE /* ValidationResultOverlayModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultOverlayModifier.swift; sourceTree = "<group>"; };
+		A9F20A722C6B7261006D3893 /* ValidatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				A916F6A32C57D27300AFA2EE /* ExampleAppApp.swift */,
 				A916F6B72C57D75600AFA2EE /* ContentView.swift */,
 				A916F6B62C57D75600AFA2EE /* ContentViewModel.swift */,
+				A9F20A722C6B7261006D3893 /* ValidatorFactory.swift */,
 				A916F6B82C57D75600AFA2EE /* TextFieldView.swift */,
 				A916F6BE2C57D7B300AFA2EE /* ValidationResultOverlayModifier.swift */,
 				A916F6A72C57D27300AFA2EE /* Assets.xcassets */,
@@ -164,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A916F6B92C57D75600AFA2EE /* ContentViewModel.swift in Sources */,
+				A9F20A732C6B7261006D3893 /* ValidatorFactory.swift in Sources */,
 				A916F6BF2C57D7B300AFA2EE /* ValidationResultOverlayModifier.swift in Sources */,
 				A916F6A42C57D27300AFA2EE /* ExampleAppApp.swift in Sources */,
 				A916F6BB2C57D75600AFA2EE /* TextFieldView.swift in Sources */,

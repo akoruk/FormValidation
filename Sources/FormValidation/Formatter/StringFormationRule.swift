@@ -74,12 +74,6 @@ public enum StringFormationRule: FormationRule {
     }
     
     private func unmaskStringToNumber(_ input: String, with mask: String) -> String {
-        var result = ""
-        for char in input {
-            if char.isNumber {
-                result.append(char)
-            }
-        }
-        return result
+        input.filter({ $0.isNumber })
     }
 }
