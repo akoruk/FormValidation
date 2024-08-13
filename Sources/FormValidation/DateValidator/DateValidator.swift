@@ -1,21 +1,21 @@
 //
-//  StringValidator.swift
+//  DateValidator.swift
 //  FormValidation
 //
-//  Created by Ahmet Koruk on 24.07.2024.
+//  Created by Ahmet Koruk on 13.08.2024.
 //
 
 import SwiftUI
 import Combine
 
-public class StringValidator: Validator {
+public class DateValidator: Validator {
     
     // MARK: - Properties
     
-    public typealias T = String
-    public typealias Rule = StringValidationRule
+    public typealias T = Date?
+    public typealias Rule = DateValidationRule
     
-    @Published public var value: String
+    @Published public var value: Date?
     @Published public var isValidating: Bool
     public var rules: [Rule]
     public let isInvalidatingOnChange: Bool
@@ -26,7 +26,7 @@ public class StringValidator: Validator {
     // MARK: - Init
     
     public init(
-        value: String,
+        value: Date?,
         isValidating: Bool,
         rules: [Rule],
         isInvalidatingOnChange: Bool,
