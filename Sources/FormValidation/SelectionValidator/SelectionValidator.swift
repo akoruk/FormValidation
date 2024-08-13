@@ -13,11 +13,11 @@ public class SelectionValidator<Data: Equatable>: Validator {
     // MARK: - Properties
     
     public typealias T = Data?
-    public typealias Rule = SelectionValidationRule
+    public typealias Rule = SelectionValidationRule<Data>
     
     @Published public var value: Data?
     @Published public var isValidating: Bool
-    public var rules: [SelectionValidationRule<Data>]
+    public var rules: [Rule]
     public let isInvalidatingOnChange: Bool
     public var onValidate: ((ValidationResult) -> Void)?
     
@@ -28,7 +28,7 @@ public class SelectionValidator<Data: Equatable>: Validator {
     public init(
         value: Data?,
         isValidating: Bool,
-        rules: [SelectionValidationRule<Data>],
+        rules: [Rule],
         isInvalidatingOnChange: Bool,
         onValidate: ((ValidationResult) -> Void)? = nil
     ) {
