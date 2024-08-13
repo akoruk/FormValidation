@@ -17,12 +17,12 @@ public class StringValidator: Validator {
     
     @Published public var value: String
     @Published public var isValidating: Bool
-    public let rules: [StringValidationRule]
+    public var rules: [StringValidationRule]
     public let isInvalidatingOnChange: Bool
-    public let onValidate: ((ValidationResult) -> Void)?
+    public var onValidate: ((ValidationResult) -> Void)?
     
     private var cancellables = Set<AnyCancellable>()
-
+    
     // MARK: - Init
     
     public init(
@@ -30,7 +30,7 @@ public class StringValidator: Validator {
         isValidating: Bool,
         rules: [StringValidationRule],
         isInvalidatingOnChange: Bool,
-        onValidate: ((ValidationResult) -> Void)?
+        onValidate: ((ValidationResult) -> Void)? = nil
     ) {
         self.value = value
         self.isValidating = isValidating

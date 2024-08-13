@@ -26,6 +26,7 @@ public enum StringValidationRule: ValidationRule {
             let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
             return emailPred.evaluate(with: input) ? .success : result
         case .phone(let count, let result):
+            // TODO: - this is not good looking. String formation should not be here
             return StringFormationRule.phone("").unformat(input).count == count ? .success : result
         case .min(let count, let result):
             return input.count >= count ? .success : result

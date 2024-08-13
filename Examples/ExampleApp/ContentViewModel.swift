@@ -11,9 +11,9 @@ import FormValidation
 
 class ContentViewModel: ObservableObject {
     
-    @Published var usernameValidator: StringValidator!
-    @Published var emailValidator: StringValidator!
-    @Published var phoneNumberValidator: StringValidator!
+    @Published var usernameValidator = ValidatorFactory.createRequiredStringValidator(minLength: 5)
+    @Published var emailValidator = ValidatorFactory.createEmailValidator()
+    @Published var phoneNumberValidator = ValidatorFactory.createPhoneNumberValidator(length: 12)
     
     private var validators: [any Validator] = []
     
@@ -30,45 +30,18 @@ class ContentViewModel: ObservableObject {
     }
     
     private func setValidators() {
-        usernameValidator = StringValidator(
-            value: "",
-            isValidating: true,
-            rules: [
-                .required(.warning("this is required")),
-                .min(5, .warning("Min 5 characters"))
-            ],
-            isInvalidatingOnChange: false,
-            onValidate: { [weak self] validationResult in
-                self?.usernameValidationResult = validationResult
-            }
-        )
+        usernameValidator.onValidate = { [weak self] validationResult in
+            self?.usernameValidationResult = validationResult
+        }
         
-        emailValidator = StringValidator(
-            value: "",
-            isValidating: false,
-            rules: [
-                .required(.warning("this is required")),
-                .email(.error("email is invalid"))
-            ],
-            isInvalidatingOnChange: false,
-            onValidate: { [weak self] validationResult in
-                self?.emailValidationResult = validationResult
-            }
-        )
+        emailValidator.onValidate = { [weak self] validationResult in
+            self?.emailValidationResult = validationResult
+        }
         
-        phoneNumberValidator = StringValidator(
-            value: "",
-            isValidating: false,
-            rules: [
-                .required(.warning("this is required")),
-                .phone(12, .error("phone is invalid"))
-            ],
-            isInvalidatingOnChange: false,
-            onValidate: { [weak self] validationResult in
-                self?.phoneValidationResult = validationResult
-            }
-        )
-
+        phoneNumberValidator.onValidate = { [weak self] validationResult in
+            self?.phoneValidationResult = validationResult
+        }
+        
         validators.append(usernameValidator)
         validators.append(emailValidator)
         validators.append(phoneNumberValidator)

@@ -17,9 +17,9 @@ public class SelectionValidator<Data: Equatable>: Validator {
     
     @Published public var value: Data?
     @Published public var isValidating: Bool
-    public let rules: [SelectionValidationRule<Data>]
+    public var rules: [SelectionValidationRule<Data>]
     public let isInvalidatingOnChange: Bool
-    public let onValidate: ((ValidationResult) -> Void)?
+    public var onValidate: ((ValidationResult) -> Void)?
     
     private var cancellables = Set<AnyCancellable>()
 
@@ -30,7 +30,7 @@ public class SelectionValidator<Data: Equatable>: Validator {
         isValidating: Bool,
         rules: [SelectionValidationRule<Data>],
         isInvalidatingOnChange: Bool,
-        onValidate: ((ValidationResult) -> Void)?
+        onValidate: ((ValidationResult) -> Void)? = nil
     ) {
         self.value = value
         self.isValidating = isValidating
