@@ -19,7 +19,7 @@ struct ValidationResultOverlayModifier: ViewModifier {
             if let message = validationResult.message {
                 Text(message)
                     .font(.caption2)
-                    .foregroundStyle(color)
+                    .foregroundColor(color)
                     .padding(.top, 4)
             }
         }

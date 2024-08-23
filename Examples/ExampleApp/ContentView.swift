@@ -54,7 +54,7 @@ struct ContentView: View {
                 viewModel.validate()
             } label: {
                 Text("Validate")
-                    .foregroundStyle(.white)
+                    .foregroundColor(.white)
                     .padding()
                     .background(Color.blue)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -63,7 +63,7 @@ struct ContentView: View {
                 viewModel.invalidate()
             } label: {
                 Text("Invalidate")
-                    .foregroundStyle(.white)
+                    .foregroundColor(.white)
                     .padding()
                     .background(Color.green)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
