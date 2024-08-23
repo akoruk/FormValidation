@@ -13,14 +13,14 @@ public enum StringValidationRule: ValidationRule {
     case phone(Int, ValidationResult)
     case min(Int, ValidationResult)
     case max(Int, ValidationResult)
-    case equal(String, ValidationResult)
-    case existsIn([String], ValidationResult)
-    case notExistIn([String], ValidationResult)
+    case minWhenTrimmed(Int, ValidationResult)
+    case equal(String, _ caseInsensitive: Bool, ValidationResult)
+    case existsIn([String], _ caseInsensitive: Bool, ValidationResult)
+    case notExistIn([String], _ caseInsensitive: Bool, ValidationResult)
     case regex(String, ValidationResult)
     case creditCard(ValidationResult)
     case url(ValidationResult)
     case strongPassword(ValidationResult)
-    case nonEmptyWhenTrimmed(ValidationResult)
     case numerical(ValidationResult)
     case alphabetical(ValidationResult)
     case alphanumerical(ValidationResult)
@@ -40,12 +40,14 @@ public enum StringValidationRule: ValidationRule {
             return input.count >= count ? .success : result
         case .max(let count, let result):
             return input.count <= count ? .success : result
-        case .equal(let string, let result):
-            return input == string ? .success : result
-        case .existsIn(let items, let result):
-            return items.contains(input) ? .success : result
-        case .notExistIn(let items, let result):
-            return !items.contains(input) ? .success : result
+        case .minWhenTrimmed(let count, let result):
+            return input.trimmingCharacters(in: .whitespacesAndNewlines).count >= count ? .success : result
+        case .equal(let string, let caseInsensitive, let result):
+            return input.isEqualTo(string, caseInsensitive: caseInsensitive) ? .success : result
+        case .existsIn(let items, let caseInsensitive, let result):
+            return items.contains(where: { $0.isEqualTo(input, caseInsensitive: caseInsensitive) }) ? .success : result
+        case .notExistIn(let items, let caseInsensitive, let result):
+            return !items.contains(where: { $0.isEqualTo(input, caseInsensitive: caseInsensitive) }) ? .success : result
         case .regex(let pattern, let result):
             return isMatchingRegex(input: input, with: pattern) ? .success : result
         case .creditCard(let result):
@@ -56,8 +58,6 @@ public enum StringValidationRule: ValidationRule {
         case .strongPassword(let result):
             let regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
             return isMatchingRegex(input: input, with: regex) ? .success : result
-        case .nonEmptyWhenTrimmed(let result):
-            return input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? result : .success
         case .numerical(let result):
             let regex = "^[0-9]+$"
             return isMatchingRegex(input: input, with: regex) ? .success : result
