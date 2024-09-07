@@ -56,7 +56,7 @@ public enum StringValidationRule: ValidationRule {
             let regex = "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
             return isMatchingRegex(input: input, with: regex) ? .success : result
         case .strongPassword(let result):
-            let regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
+            let regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).{8,32}$"
             return isMatchingRegex(input: input, with: regex) ? .success : result
         case .numerical(let result):
             let regex = "^[0-9]+$"

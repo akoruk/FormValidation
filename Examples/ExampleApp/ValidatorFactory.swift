@@ -59,6 +59,22 @@ final class ValidatorFactory {
             onValidate: onValidate
         )
     }
+
+    static func createPasswordValidator(
+        value: String = "",
+        onValidate: ((ValidationResult) -> Void)? = nil
+    ) -> StringValidator {
+        StringValidator(
+            value: value,
+            isValidating: false,
+            rules: [
+                .required(.warning("Password is required")),
+                .strongPassword(.error("Strong password needed"))
+            ],
+            isInvalidatingOnChange: true,
+            onValidate: onValidate
+        )
+    }
     
     static func createRequiredSelectionValidator<Data>(
         value: Data? = nil,

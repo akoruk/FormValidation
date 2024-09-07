@@ -37,7 +37,12 @@ struct ContentView: View {
                     value: $viewModel.emailValidator.value
                 )
             )
-            
+            TextFieldView(
+                placeholder: "Enter your password",
+                validationResult: viewModel.passwordValidationResult,
+                text: $viewModel.passwordValidator.value
+            )
+
             TextFieldView(
                 placeholder: "Enter your phone",
                 validationResult: viewModel.phoneValidationResult,
