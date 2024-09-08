@@ -14,16 +14,16 @@ let package = Package(
             name: "FormValidation",
             targets: ["FormValidation"]),
         .executable(
-            name: "ExampleApp",
-            targets: ["ExampleApp"])
+            name: "FormValidation SampleApp",
+            targets: ["FormValidation SampleApp"])
     ],
     targets: [
         .target(
             name: "FormValidation"),
         .executableTarget(
-            name: "ExampleApp",
+            name: "FormValidation SampleApp",
             dependencies: ["FormValidation"],
-            path: "Examples/ExampleApp"),
+            path: "Example"),
         .testTarget(
             name: "FormValidationTests",
             dependencies: ["FormValidation"]),

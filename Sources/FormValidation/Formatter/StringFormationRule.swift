@@ -13,7 +13,9 @@ public enum StringFormationRule: FormationRule {
     case creditCard(String)
     case email
     case filter(allowedCharacters: String)
-    
+    case lowercase
+    case uppercase
+
     public func format(_ input: String) -> String {
         switch self {
         case .max(let count):
@@ -37,9 +39,13 @@ public enum StringFormationRule: FormationRule {
             return input
                 .filter { String($0).rangeOfCharacter(from: allowedChars) != nil }
                 .lowercased()
+        case .lowercase:
+            return input.localizedLowercase
+        case .uppercase:
+            return input.localizedUppercase
         }
     }
-    
+
     public func unformat(_ input: String) -> String {
         switch self {
         case .max:
@@ -52,14 +58,18 @@ public enum StringFormationRule: FormationRule {
             return input
         case .filter:
             return input
+        case .lowercase:
+            return input
+        case .uppercase:
+            return input
         }
     }
-    
+
     private func maskString(_ input: String, with mask: String) -> String {
         var result = ""
         var inputIndex = input.startIndex
         var maskIndex = mask.startIndex
-        
+
         while maskIndex < mask.endIndex && inputIndex < input.endIndex {
             if mask[maskIndex] == "X" {
                 result.append(input[inputIndex])
@@ -69,10 +79,10 @@ public enum StringFormationRule: FormationRule {
             }
             maskIndex = mask.index(after: maskIndex)
         }
-        
+
         return result
     }
-    
+
     private func unmaskStringToNumber(_ input: String, with mask: String) -> String {
         input.filter({ $0.isNumber })
     }
